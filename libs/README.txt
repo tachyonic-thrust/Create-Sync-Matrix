@@ -1,7 +1,7 @@
 Local mod jars for development
 ==============================
 
-Place the exact game jars you use in your modpack here so Gradle can resolve them without remote Maven access:
+Place the exact game jars you use in your modpack here so Gradle can resolve them without remote Maven access. Use these exact filenames:
 
 - create-1.20.1-6.0.8.jar
 - Sync-0.1.8.jar

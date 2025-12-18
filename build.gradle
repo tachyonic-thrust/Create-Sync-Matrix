@@ -84,8 +84,11 @@ dependencies {
     // files in libs/ (see libs/README.txt):
     //   - create-1.20.1-6.0.8.jar
     //   - Sync-0.1.8.jar
-    implementation fg.deobf(name: 'create-1.20.1-6.0.8', ext: 'jar')
-    implementation fg.deobf(name: 'Sync-0.1.8', ext: 'jar')
+    //
+    // IMPORTANT: Use fg.deobf(files(...)) for flatDir jars so ForgeGradle does not
+    // invent a Maven coordinate (which causes the null_mapped_official_* error).
+    implementation fg.deobf(files("libs/create-1.20.1-6.0.8.jar"))
+    implementation fg.deobf(files("libs/Sync-0.1.8.jar"))
 
     compileOnly 'org.jetbrains:annotations:24.0.1'
     annotationProcessor 'org.jetbrains:annotations:24.0.1'
