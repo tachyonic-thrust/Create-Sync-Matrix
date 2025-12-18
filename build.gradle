@@ -69,19 +69,23 @@ repositories {
     maven { url = 'https://maven.minecraftforge.net' }
     maven { url = 'https://maven.tterrag.com/' }
     maven { url = 'https://maven.covers1624.net/' }
-    maven { url = 'https://cursemaven.com' }
     mavenCentral()
+    // Fallback for local mod jars when public Maven coordinates are unavailable or differ.
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
 
-    // Create mod (Forge) - used for kinetic mechanics. Version placeholder uses 6.0.8 as provided by user.
-    implementation fg.deobf('com.simibubi.create:create-1.20.1:6.0.8')
-
-    // Sync (Forge) 0.1.8 - the dependency that defines piggawatt energy / Shell Constructor APIs.
-    // The coordinates below assume the project is published to CurseMaven; adjust if you host it elsewhere.
-    implementation fg.deobf('curse.maven:sync-forge-705684:0.1.8')
+    // Create 6.0.8 and Sync 0.1.8 (Forge) are resolved from local jars to ensure
+    // the build uses exactly the same artifacts as your in-game setup. Place these
+    // files in libs/ (see libs/README.txt):
+    //   - create-1.20.1-6.0.8.jar
+    //   - Sync-0.1.8.jar
+    implementation fg.deobf(name: 'create-1.20.1-6.0.8', ext: 'jar')
+    implementation fg.deobf(name: 'Sync-0.1.8', ext: 'jar')
 
     compileOnly 'org.jetbrains:annotations:24.0.1'
     annotationProcessor 'org.jetbrains:annotations:24.0.1'

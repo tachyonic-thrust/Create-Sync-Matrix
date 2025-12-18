@@ -8,6 +8,9 @@ run/
 # Gradle wrapper binary (excluded to keep the repository text-only)
 gradle/wrapper/gradle-wrapper.jar
 
+# Local mod jars used for compilation (Create, Sync, etc.)
+libs/*.jar
+
 # IDEs
 .idea/
 *.iml
