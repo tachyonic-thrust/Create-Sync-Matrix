@@ -1,0 +1,23 @@
+# Gradle
+.gradle/
+build/
+out/
+run/
+!/run/readme.txt
+
+# Gradle wrapper binary (excluded to keep the repository text-only)
+gradle/wrapper/gradle-wrapper.jar
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

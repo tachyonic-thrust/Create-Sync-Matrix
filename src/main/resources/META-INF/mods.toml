@@ -1,0 +1,40 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="create_sync_matrix"
+version="0.1.0"
+displayName="Create Sync Matrix"
+author="Create-Sync-Matrix Contributors"
+description='''
+Converts Create rotational power into piggawatts for Sync's Shell Constructor.
+'''
+
+[[dependencies.create_sync_matrix]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.10,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.create_sync_matrix]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.create_sync_matrix]]
+modId="create"
+mandatory=true
+versionRange="[6.0.8,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.create_sync_matrix]]
+modId="sync"
+mandatory=true
+versionRange="[0.1.8,)"
+ordering="NONE"
+side="BOTH"

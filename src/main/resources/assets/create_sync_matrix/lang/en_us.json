@@ -1,0 +1,7 @@
+{
+  "block.create_sync_matrix.piggawatt_converter": "Piggawatt Converter",
+  "item.create_sync_matrix.piggawatt_converter": "Piggawatt Converter",
+  "desc.create_sync_matrix.piggawatt_converter": "Turns Create rotational speed into Sync-compatible piggawatts. Output side matches the block's facing.",
+  "tooltip.create_sync_matrix.piggawatt_converter.rate": "Per speed point: %s piggawatts/tick",
+  "tooltip.create_sync_matrix.piggawatt_converter.buffer": "Stored: %s piggawatts"
+}

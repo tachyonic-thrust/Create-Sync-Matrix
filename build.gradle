@@ -1,0 +1,110 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+group = 'com.create_sync_matrix'
+version = '0.1.0'
+
+base {
+    archivesName = 'create_sync_matrix'
+}
+
+def generatedResourcesDir = file('src/generated/resources')
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release.set(17)
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run/client')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                create_sync_matrix {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            workingDirectory project.file('run/server')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                create_sync_matrix {
+                    source sourceSets.main
+                }
+            }
+        }
+        data {
+            workingDirectory project.file('run/data')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'create_sync_matrix', '--all', '--output', generatedResourcesDir, '--existing', 'src/main/resources'
+            mods {
+                create_sync_matrix {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { url = 'https://maven.minecraftforge.net' }
+    maven { url = 'https://maven.tterrag.com/' }
+    maven { url = 'https://maven.covers1624.net/' }
+    maven { url = 'https://cursemaven.com' }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
+
+    // Create mod (Forge) - used for kinetic mechanics. Version placeholder uses 6.0.8 as provided by user.
+    implementation fg.deobf('com.simibubi.create:create-1.20.1:6.0.8')
+
+    // Sync (Forge) 0.1.8 - the dependency that defines piggawatt energy / Shell Constructor APIs.
+    // The coordinates below assume the project is published to CurseMaven; adjust if you host it elsewhere.
+    implementation fg.deobf('curse.maven:sync-forge-705684:0.1.8')
+
+    compileOnly 'org.jetbrains:annotations:24.0.1'
+    annotationProcessor 'org.jetbrains:annotations:24.0.1'
+}
+
+sourceSets.main.resources { srcDir generatedResourcesDir }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            name = 'localMaven'
+            url = uri('file://' + new File(rootProject.buildDir, 'publish-maven').absolutePath)
+        }
+    }
+}
+
+idea {
+    module {
+        generatedSourceDirs.add(file('src/generated'))
+    }
+}
