@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "create_sync_matrix:block/piggawatt_converter" },
+    "facing=south": { "model": "create_sync_matrix:block/piggawatt_converter", "y": 180 },
+    "facing=west":  { "model": "create_sync_matrix:block/piggawatt_converter", "y": 270 },
+    "facing=east":  { "model": "create_sync_matrix:block/piggawatt_converter", "y": 90 },
+    "facing=up":    { "model": "create_sync_matrix:block/piggawatt_converter", "x": -90 },
+    "facing=down":  { "model": "create_sync_matrix:block/piggawatt_converter", "x": 90 }
+  }
+}

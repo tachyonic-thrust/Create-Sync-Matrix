@@ -1,0 +1,30 @@
+Create Sync Matrix – In-World Setup Guide
+=========================================
+
+This file documents the exact in-world infrastructure you need to build to turn Create rotational power into Sync piggawatts using the Piggawatt Converter block.
+
+1) Place the Piggawatt Converter
+- Craft or grab the Piggawatt Converter from the Redstone & Gears creative tab.
+- Right-click to place it so the block's face (the side you see when placing) points at the machine you want to power. By default it should face you when placed; use a wrench or pick/block placement to rotate as needed.
+- The facing direction is the side that will push piggawatts out of the block.
+
+2) Connect rotational power from Create
+- Run a shaft directly into either the front or back of the block along its facing axis. Both directions are valid for mechanical input.
+- Any Create generator works: a water wheel + gear train, steam engine, windmill, etc. Higher rotational speed means more piggawatts per tick (see config for the multiplier).
+- You do not need stress to exceed any specific threshold—the converter simply reads current speed and scales output.
+
+3) Wire the output to Sync machines
+- Place a Sync Shell Constructor directly on the converter's facing side. The converter exposes Forge's energy capability there, so the constructor can draw piggawatts automatically.
+- If you route power through cables from other mods that speak Forge Energy, ensure they connect to the converter's facing side; the other sides are intentionally blocked to avoid infinite loops.
+
+4) Observe and tune
+- Sneak with Create Goggles equipped to see a tooltip: current buffer, maximum buffer, and the configured speed → piggawatt rate.
+- If the constructor starves for power, increase the mechanical speed or adjust the config values in `config/create_sync_matrix-common.toml`:
+  - `converter.piggawattPerSpeed` raises or lowers the generation rate per speed unit.
+  - `converter.maxBuffer` increases the internal storage if your generators are bursty.
+  - `converter.maxOutputPerTick` controls how fast the buffer empties into neighboring blocks.
+
+5) Troubleshooting tips
+- No energy movement? Verify the facing side actually points at the Shell Constructor; use F3 to check block states or rotate with a wrench.
+- Speed reads zero? Ensure the shaft is inline with the converter's facing axis (front/back). Side connections will not transmit rotation.
+- Values feel off? The mod intentionally treats piggawatts as Forge Energy so Sync machines that consume FE will also accept the output. If your Sync build expects a different API, adjust the dependency coordinates in `build.gradle` and the capability wiring in `PiggawattConverterBlockEntity`.
